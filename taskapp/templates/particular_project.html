@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particular Projects</title>
+</head>
+<body>
+    <center>
+        <a href="{% url 'home' %}">Home Page</a>
+
+        <h1>All Projects</h1>
+        <table border="2">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Client</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+            {% for p in proj_data1 %}
+                <tr>
+                    <td>{{ p.pname }}</td>
+                    <td>{{ p.pdesc }}</td>
+                    <td>{{ p.client.cname }}</td>
+                    <td>{{ p.start_date }}</td>
+                    <td>{{ p.end_date }}</td>
+                    <td>
+                        <a href="{% url 'add_task' p.id %}"><button>Add Task</button></a>
+                    </td>
+                    <td>
+                        <a href="{% url 'view_project_task' p.id %}"><button>Existing Task</button></a>
+                    </td>
+                </tr>
+            
+            {% endfor %}
+        </table>
+        {% if messages %}
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        {% endif %}
+    </center>
+</body>
+</html>

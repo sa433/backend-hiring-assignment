@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <center>
+        <h1>Home Page</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="cname" placeholder="enter client name" required><br><br>
+            <input type="submit" value="Add Clients">
+        </form>
+        <br><br>
+        <table border="2">
+            <tr>
+                <th>Client ID</th>
+                <th>Client Name</th>
+            </tr>
+
+            {% for c in client_data %}
+                <tr>
+                    <td>{{ c.id }}</td>
+                    <td>{{ c.cname }}</td>
+                    <td>
+                        <a href="{% url 'project_create' c.id %}"><button>Add Project</button></a>
+                    </td>
+                    <td>
+                        <a href="{% url 'view_client_project' c.id %}"><button>Existing Projects</button></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br><br>
+        <a href="{% url 'view_projects' %}"><button>View All Projects</button></a>
+        <br><br>
+        <a href="{% url 'view_tasks' %}"><button>View All Task</button></a>
+        <br><br>
+        {% if msg %}
+            {{ msg }}
+        {% endif %}
+    </center>
+</body>
+</html>

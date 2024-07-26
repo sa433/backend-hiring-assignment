@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particular Task</title>
+</head>
+<body>
+    <center>
+        <a href="{% url 'home' %}">Home Page</a>
+
+        <h1>Particular Tasks</h1>
+        <table border="2">
+            <tr>
+                <th>Task Name</th>
+                <th>Task Description</th>
+                <th>Project Name</th>
+                <th>Task Status</th>
+            </tr>
+            {% for t in task_data %}
+                <tr>
+                    <td>{{ t.tname }}</td>
+                    <td>{{ t.tdesc }}</td>
+                    <td>{{ t.proj_name.pname }}</td>
+                    <td>{{ t.status }}</td>
+                </tr>
+            
+            {% endfor %}
+        </table>
+        {% if messages %}
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        {% endif %}
+    </center>
+</body>
+</html>

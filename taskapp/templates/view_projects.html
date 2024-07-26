@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Projects</title>
+</head>
+<body>
+    <center>
+        <a href="{% url 'home' %}">Home Page</a>
+
+        <h1>View All Projects</h1>
+        <table border="2">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Client</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+            {% for p in proj_data %}
+                <tr>
+                    <td>{{ p.pname }}</td>
+                    <td>{{ p.pdesc }}</td>
+                    <td>{{ p.client.cname }}</td>
+                    <td>{{ p.start_date }}</td>
+                    <td>{{ p.end_date }}</td>
+                    <td>
+                        <form method="post" action="{% url 'del_project' p.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Delete Project</button>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+                <p>Projects Not Available</p>
+            {% endfor %}
+        </table>
+        {% if messages %}
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        {% endif %}
+    </center>
+</body>
+</html>

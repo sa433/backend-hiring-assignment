@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Page</title>
+</head>
+<body>
+    <center>
+        <h1>Task Page</h1>
+        <br><br>
+        <a href="{% url 'view_tasks' %}"><button>View All Task</button></a>
+        <br><br>
+        <h2>Create Task</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" placeholder="enter task name" name="tname" required><br><br>
+            <input type="text" placeholder="enter task description" name="tdesc" required><br><br>
+            <select name="status">
+                {% for value, display in status_choices %}
+                    <option value="{{ value }}">{{ display }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <input type="submit" value="Create Task">
+        </form>
+        <br><br>
+        {% if msg %}
+            <p>{{ msg }}</p>
+        {% endif %}
+
+        
+    </center>
+    
+</body>
+</html>
